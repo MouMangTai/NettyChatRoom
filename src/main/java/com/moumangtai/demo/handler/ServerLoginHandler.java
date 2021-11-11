@@ -15,7 +15,10 @@ public class ServerLoginHandler extends SimpleChannelInboundHandler<LoginRequest
 
 
         log.info("接收到的用户名为：{},密码为：{}",userName,passWord);
-
-        ctx.channel().writeAndFlush(new LoginResponseMessage(200,"登陆成功"));
+        if(userName.equals("wqd")&&passWord.equals("123")){
+            ctx.channel().writeAndFlush(new LoginResponseMessage(200,"登陆成功"));
+        }else{
+            ctx.channel().writeAndFlush(new LoginResponseMessage(300,"账号密码错误"));
+        }
     }
 }
