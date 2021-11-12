@@ -6,16 +6,15 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class LoginRequestMessage extends Message{
+public class GsendRequestMessage extends Message{
 
-    //用户名
-    private String userName;
 
-    //密码
-    private String passWord;
+    private String groupName;
+
+    private String content;
 
     @Override
     public int getMessageType() {
-        return MessageConstant.LOGIN_REQUEST_MESSAGE;
+        return MessageConstant.GSEND_REQUEST_MESSAGE;
     }
 }

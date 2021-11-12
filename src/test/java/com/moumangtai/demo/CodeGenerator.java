@@ -1,4 +1,4 @@
-package com.moumangtai.demo.config;
+package com.moumangtai.demo;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;

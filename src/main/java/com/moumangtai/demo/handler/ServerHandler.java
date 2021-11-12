@@ -1,5 +1,6 @@
 package com.moumangtai.demo.handler;
 
+import com.moumangtai.demo.factory.SessionFactory;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         log.info("{}的连接断开",ctx.channel().remoteAddress());
+        SessionFactory.getSession().unbind(ctx.channel());
     }
 
     @Override

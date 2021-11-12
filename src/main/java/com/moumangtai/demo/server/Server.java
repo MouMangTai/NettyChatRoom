@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
 
+/**
+ * 服务端启动器
+ */
 @Component
 public class Server {
 

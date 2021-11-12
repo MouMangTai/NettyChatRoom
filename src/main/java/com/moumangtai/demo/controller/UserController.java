@@ -2,12 +2,12 @@ package com.moumangtai.demo.controller;
 
 
 
-import com.moumangtai.demo.service.IUserService;
-import com.moumangtai.demo.util.RedisUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.moumangtai.demo.factory.SessionFactory;
+import com.moumangtai.demo.message.SendRequestMessage;
+import io.netty.channel.Channel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,20 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/demo/user")
 public class UserController  {
 
-
-    @Autowired
-    private IUserService iUserService;
-
-    @Autowired
-    private RedisUtil redisUtil;
-
     @GetMapping("/test")
-    public void test(){
-        Boolean aBoolean = iUserService.checkLogin("111", "111");
-        redisUtil.set("test",122);
-        String test = redisUtil.get("test");
-
-        System.out.println(aBoolean+test);
+    public void test(@RequestParam String userName,@RequestParam String content){
+        Channel channel = SessionFactory.getSession().getChannel(userName);
+        channel.writeAndFlush(new SendRequestMessage(userName,content));
     }
 
 }

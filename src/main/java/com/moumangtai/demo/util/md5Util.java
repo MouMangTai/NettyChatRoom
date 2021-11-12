@@ -1,12 +1,17 @@
 package com.moumangtai.demo.util;
 
+import com.moumangtai.demo.factory.GroupSessionFactory;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * MD5工具类
+ */
 public class md5Util {
 
     public static void main(String[] args) {
-        System.out.println(code("123"));
+        System.out.println(GroupSessionFactory.getGroupSession().getChannels("测试群聊"));
     }
 
     public static String code(String str) {
