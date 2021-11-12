@@ -20,6 +20,6 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        log.info("{}的连接异常断开,异常为：{}",ctx.channel().remoteAddress(),cause);
+        log.info("服务器发生异常 ，异常为：{}",ctx.channel().remoteAddress(),cause);
     }
 }

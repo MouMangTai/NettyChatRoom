@@ -11,8 +11,8 @@ public class LoginResponseMessage extends ResponseMessage{
         super();
     }
 
-    public LoginResponseMessage(int code, String message) {
-        super(code, message);
+    public LoginResponseMessage(int code, String message, Object data) {
+        super(code, message, data);
     }
 
     @Override

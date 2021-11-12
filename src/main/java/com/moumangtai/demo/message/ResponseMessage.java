@@ -13,7 +13,18 @@ public abstract class ResponseMessage extends Message{
 
     private String message;
 
+    private Object data;
+
+    public ResponseMessage(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
     public boolean isSuccess(){
         return code==200;
+    }
+
+    public Object getData(){
+        return data;
     }
 }

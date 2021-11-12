@@ -2,6 +2,7 @@ package com.moumangtai.demo.handler;
 
 import com.moumangtai.demo.constant.MessageConstant;
 import com.moumangtai.demo.message.LoginRequestMessage;
+import com.moumangtai.demo.message.SendRequestMessage;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
@@ -42,27 +43,49 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                 }
 
                 if(MessageConstant.IS_LOGIN.get()){
-                    System.out.println("------------------");
-                    System.out.println("|     登陆成功     |");
-                    System.out.println("------------------");
+                    System.out.println("------------------------------------------");
+                    System.out.println("|         登陆成功(请根据提示输入指令）         |");
+                    System.out.println("------------------------------------------");
+                    System.out.println("| send    [userName]  [content] 发送单聊消息 |");
+                    System.out.println("| gsend   [groupName] [content] 发送群聊消息 |");
+                    System.out.println("| gcreate [groupName] [user1..] 创建群聊     |");
+                    System.out.println("------------------------------------------");
 
+                    String s = sc.nextLine();
 
+                    sendCommand(ctx,s);
 
                 }else{
                     System.out.println("------------------------");
                     System.out.println("|     登陆失败重新登陆     |");
                     System.out.println("------------------------");
+//                    MessageConstant.WAIT_FOR_LOOP.countDown();
+
                     ctx.channel().close();
-                    return;
+                    return ;
                 }
 
 
             }).start();
 
 
-
-
+//            MessageConstant.WAIT_FOR_LOOP.await();
+//
+//
 //        }
 
     }
+
+    private boolean sendCommand(ChannelHandlerContext ctx,String s) {
+        String[] splits = s.split(" ");
+        log.info("{},{},{}",splits[0],splits[1],splits[2]);
+        switch(splits[0]){
+            case "send" :
+                ctx.channel().writeAndFlush(new SendRequestMessage(splits[1],splits[2]));
+                break; //可选
+        }
+        return true;
+    }
+
+
 }
