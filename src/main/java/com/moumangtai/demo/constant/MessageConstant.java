@@ -22,7 +22,7 @@ public class MessageConstant {
     public static final int SEND_RESPONSE_MESSAGE = 3;
     public static final int GCREATE_REQUEST_MESSAGE = 4;
     public static final int GCREATE_RESPONSE_MESSAGE = 5;
-    public static final int GSEND_REQUEST_MESSAGE = 4;
-    public static final int GSEND_RESPONSE_MESSAGE = 5;
+    public static final int GSEND_REQUEST_MESSAGE = 6;
+    public static final int GSEND_RESPONSE_MESSAGE = 7;
 
 }

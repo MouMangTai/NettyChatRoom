@@ -1,5 +1,7 @@
 package com.moumangtai.demo.message;
 
+import com.moumangtai.demo.constant.MessageConstant;
+
 public class GsendResponseMessage extends ResponseMessage{
 
     public GsendResponseMessage() {
@@ -15,6 +17,6 @@ public class GsendResponseMessage extends ResponseMessage{
 
     @Override
     public int getMessageType() {
-        return 0;
+        return MessageConstant.GSEND_RESPONSE_MESSAGE;
     }
 }
