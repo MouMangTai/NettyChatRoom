@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/chatRoom?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password:
+    password: Winner99,,
   # Redis配置
   redis:
     # Redis 服务器地址
@@ -15,7 +15,7 @@ spring:
     # 连接端口号
     port: 6379
     # 密码
-    password:
+    password: Winner99,,
     # 数据库索引（0 - 15）
     database: 0
     # 连接超时时间（毫秒）
@@ -52,3 +52,7 @@ mybatis-plus:
       logic-not-delete-value: 1
       # 删除后
       logic-delete-value: 0
+
+# 配置序列化算法
+serializer:
+  type: GSON

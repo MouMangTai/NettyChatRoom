@@ -12,6 +12,7 @@ public class md5Util {
 
     public static void main(String[] args) {
         System.out.println(GroupSessionFactory.getGroupSession().getChannels("测试群聊"));
+        System.out.println(SpringUtil.getBean(SpringUtil.class));
     }
 
     public static String code(String str) {

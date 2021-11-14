@@ -17,6 +17,8 @@ public class ClientChannelInitializer extends ChannelInitializer<SocketChannel> 
         channel.pipeline().addLast(new SendResponseHandler());
         channel.pipeline().addLast(new GcreateResponseHandler());
         channel.pipeline().addLast(new GsendResponseHandler());
+        channel.pipeline().addLast(new RegisterResponseHandler());
         channel.pipeline().addLast(new ClientHandler());
+
     }
 }

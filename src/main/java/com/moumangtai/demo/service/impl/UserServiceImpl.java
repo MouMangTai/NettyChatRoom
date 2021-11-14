@@ -9,6 +9,7 @@ import com.moumangtai.demo.util.md5Util;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * <p>
@@ -34,5 +35,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public Boolean checkLogin(String userName, String passWord) {
         User user = userMapper.selectOne(new QueryWrapper<User>().eq("user_name", userName).eq("pass_word", md5Util.code(passWord)));
         return user!=null;
+    }
+
+    /**
+     * 注册
+     * @param userName
+     * @param passWord
+     * @return
+     */
+    @Override
+    public Boolean register(String userName, String passWord) {
+        User user = userMapper.selectOne(new QueryWrapper<User>().select("id").eq("user_name", userName));
+        if(user==null){
+            user = new User();
+            user.setUserName(userName);
+            user.setPassWord(md5Util.code(passWord));
+            user.setCreateTime(new Date());
+            user.setModifiedTime(new Date());
+            user.setDeleted(0);
+            userMapper.insert(user);
+            return true;
+        }
+        return false;
+
     }
 }

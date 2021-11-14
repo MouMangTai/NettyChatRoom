@@ -20,4 +20,12 @@ public interface IUserService extends IService<User> {
      * @return
      */
     Boolean checkLogin(String userName,String passWord);
+
+    /**
+     * 注册
+     * @param userName
+     * @param passWord
+     * @return
+     */
+    Boolean register(String userName,String passWord);
 }
