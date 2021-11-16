@@ -28,4 +28,12 @@ public interface IUserService extends IService<User> {
      * @return
      */
     Boolean register(String userName,String passWord);
+
+
+    /**
+     * 测试RPC的调用
+     * @param value
+     * @return
+     */
+    String RpcTest(Integer value);
 }

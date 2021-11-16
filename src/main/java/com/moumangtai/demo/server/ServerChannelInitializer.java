@@ -23,6 +23,7 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
         channel.pipeline().addLast(new GcreateRequestHandler());
         channel.pipeline().addLast(new GsendRequestHandler());
         channel.pipeline().addLast(new RegisterRequestHandler());
+        channel.pipeline().addLast(new RpcRequestHandler());
         channel.pipeline().addLast(new ServerHandler());
     }
 }

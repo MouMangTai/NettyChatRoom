@@ -1,9 +1,11 @@
 package com.moumangtai.demo.constant;
 
 import com.moumangtai.demo.message.*;
+import io.netty.util.concurrent.Promise;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -11,6 +13,21 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * 有关消息的常量
  */
 public class MessageConstant {
+
+
+    /**
+     * 消息序列号和Promise的对应
+     */
+    private final static Map<Integer, Promise<Object>> PROMISES = new ConcurrentHashMap<>();
+
+    public static Promise<Object> getPromise(int sequenceId){
+        return PROMISES.get(sequenceId);
+    }
+
+    public static void putPromise(int sequenceId,Promise<Object> promise){
+        PROMISES.put(sequenceId,promise);
+    }
+
 
     private final static Map<Byte,Class<?>> map = new HashMap<>();
 
@@ -25,6 +42,8 @@ public class MessageConstant {
         map.put(MessageConstant.GSEND_RESPONSE_MESSAGE, GsendResponseMessage.class);
         map.put(MessageConstant.REGISTER_REQUEST_MESSAGE, RegisterRequestMessage.class);
         map.put(MessageConstant.REGISTER_RESPONSE_MESSAGE, RegisterResponseMessage.class);
+        map.put(MessageConstant.RPC_REQUEST_MESSAGE,RpcRequestMessage.class);
+        map.put(MessageConstant.RPC_RESPONSE_MESSAGE,RpcResponseMessage.class);
     }
 
     /**
@@ -56,5 +75,7 @@ public class MessageConstant {
     public static final byte GSEND_RESPONSE_MESSAGE = 7;
     public static final byte REGISTER_REQUEST_MESSAGE = 8;
     public static final byte REGISTER_RESPONSE_MESSAGE = 9;
+    public static final byte RPC_REQUEST_MESSAGE = 10;
+    public static final byte RPC_RESPONSE_MESSAGE = 11;
 
 }

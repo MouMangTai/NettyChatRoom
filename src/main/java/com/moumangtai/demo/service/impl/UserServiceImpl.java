@@ -59,4 +59,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return false;
 
     }
+
+    /**
+     * 测试RPC的调用
+     * @param value
+     * @return
+     */
+    @Override
+    public String RpcTest(Integer value) {
+        return "测试数据为:"+value;
+    }
 }

@@ -1,6 +1,7 @@
 package com.moumangtai.demo.client;
 
 import io.netty.bootstrap.Bootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -23,7 +24,9 @@ public class Client {
                     .channel(NioSocketChannel.class)
                     .handler(new ClientChannelInitializer());
             ChannelFuture future = bootstrap.connect(host,port).sync();
-            future.channel().closeFuture().sync();
+            Channel channel = future.channel();
+
+            channel.closeFuture().sync();
         } catch (Exception e){
             e.printStackTrace();
         } finally {
