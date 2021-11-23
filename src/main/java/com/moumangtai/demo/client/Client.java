@@ -13,7 +13,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 public class Client {
 
     public static void main(String[] args) throws InterruptedException {
-        new Client().connect("127.0.0.1",8282);
+        new Client().connect("172.19.188.100",8282);
     }
 
     public void connect(String host,int port) throws InterruptedException {

@@ -46,7 +46,13 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                         while(true){
                             printCommandPage();
                             String s = sc.nextLine();
-                            sendCommand(ctx,s);
+                            try{
+                                sendCommand(ctx,s);
+                            }catch (Exception e){
+                                System.out.println("------------------------");
+                                System.out.println("|     输入指令存在问题     |");
+                                System.out.println("------------------------");
+                            }
                         }
                     }else{
                         System.out.println("------------------------");

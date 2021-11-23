@@ -22,7 +22,7 @@ public class DemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        InetSocketAddress address = new InetSocketAddress("127.0.0.1",8282);
+        InetSocketAddress address = new InetSocketAddress("172.19.188.100",8282);
         server.bind(address);
     }
 }
