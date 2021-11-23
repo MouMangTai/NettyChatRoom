@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class PropertyConfig {
 
     //默认为JDK
-    private static String value = "FASTJSON";
+    private static String value = "JDK";
 
     //通过Value注解读取配置文件，如果属性不是static可以直接加在属性上。注意这里的方法不能为static
     @Value("${serializer.type}")

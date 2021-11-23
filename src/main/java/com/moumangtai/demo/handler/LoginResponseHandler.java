@@ -15,4 +15,6 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
         }
         MessageConstant.WAIT_FOR_LOGIN.countDown();
     }
+
+
 }

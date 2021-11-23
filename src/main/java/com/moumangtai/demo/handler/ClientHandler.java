@@ -15,6 +15,8 @@ import java.util.concurrent.CountDownLatch;
 @Slf4j
 public class ClientHandler extends ChannelInboundHandlerAdapter {
 
+
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         log.info("连接到服务器{}成功",ctx.channel().remoteAddress());
@@ -23,7 +25,6 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
             Scanner sc = new Scanner(System.in);
             while(true){
-
                 printHomePage();
                 String select = sc.nextLine();
                 if(select.equals("1")){

@@ -24,4 +24,12 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         log.info("服务器发生异常 ，异常为：{}",ctx.channel().remoteAddress(),cause);
     }
+
+    @Override
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        System.out.println(msg);
+
+        ctx.writeAndFlush(msg);
+        super.channelRead(ctx, msg);
+    }
 }

@@ -55,4 +55,4 @@ mybatis-plus:
 
 # 配置序列化算法
 serializer:
-  type: FASTJSON
+  type: JDK
