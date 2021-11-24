@@ -11,9 +11,8 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  * 客户端启动器
  */
 public class Client {
-
-    public static void main(String[] args) throws InterruptedException {
-        new Client().connect("172.19.188.100",8282);
+    public static void main(String[] args1) throws InterruptedException {
+        new Client().connect("moumangtai.com",8282);
     }
 
     public void connect(String host,int port) throws InterruptedException {

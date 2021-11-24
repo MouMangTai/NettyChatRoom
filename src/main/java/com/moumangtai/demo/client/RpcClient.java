@@ -103,7 +103,7 @@ public class RpcClient {
                     .group(group)
                     .channel(NioSocketChannel.class)
                     .handler(new ClientChannelInitializer());
-            ChannelFuture future = bootstrap.connect("127.0.0.1",8282).sync();
+            ChannelFuture future = bootstrap.connect("152.136.230.44",8485).sync();
             channel = future.channel();
 
 

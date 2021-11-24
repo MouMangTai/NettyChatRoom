@@ -113,6 +113,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
             case "gsend" :
                 ctx.channel().writeAndFlush(new GsendRequestMessage(splits[1],splits[2]));
                 break;
+            case "q":
+
+
         }
         return true;
     }
@@ -145,7 +148,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         System.out.println("| send    [userName]  [content] 发送单聊消息 |");
         System.out.println("| gsend   [groupName] [content] 发送群聊消息 |");
         System.out.println("| gcreate [groupName] [user1..] 创建群聊     |");
-        System.out.println("| q                      退出并返回到首页     |");
+        System.out.println("| q                             退出系统     |");
         System.out.println("------------------------------------------");
     }
 }

@@ -40,10 +40,14 @@ public class MessageCodec extends ByteToMessageCodec<Message> {
         // 8. 正文
         out.writeBytes(bytes);
 
+        System.out.println(out.toString());
+
     }
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
+        System.out.println(in.toString());
+
         // 按照自定义的格式取出
         // 1. 4个字节的魔数
         int magicNum = in.readInt();

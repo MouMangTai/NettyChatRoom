@@ -13,6 +13,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.Set;
 
 public class GcreateRequestHandler extends SimpleChannelInboundHandler<GcreateRequestMessage> {
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, GcreateRequestMessage msg) throws Exception {
         Set<String> users = msg.getUsers();

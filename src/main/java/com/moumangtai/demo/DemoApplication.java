@@ -2,27 +2,20 @@ package com.moumangtai.demo;
 
 import com.moumangtai.demo.server.Server;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.net.InetSocketAddress;
 
 @SpringBootApplication
 @MapperScan("com.moumangtai.demo.mapper")
-public class DemoApplication implements CommandLineRunner {
+public class DemoApplication{
 
-    @Autowired
-    private Server server;
-
-    public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        InetSocketAddress address = new InetSocketAddress("172.19.188.100",8282);
+    public static void main(String[] args) throws InterruptedException {
+        ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+        Server server = context.getBean(Server.class);
+        InetSocketAddress address = new InetSocketAddress("127.0.0.1",8112);
         server.bind(address);
     }
 }
