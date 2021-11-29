@@ -8,13 +8,15 @@ import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @ChannelHandler.Sharable
+@Slf4j
 public class ChatRoomHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
-
+    //用于记录和管理所有客户端的channels
     private static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     //广播
@@ -32,7 +34,6 @@ public class ChatRoomHandler extends SimpleChannelInboundHandler<TextWebSocketFr
                 channel.writeAndFlush(new TextWebSocketFrame("我:" + content));
             }
         }
-
     }
 
 
@@ -40,7 +41,7 @@ public class ChatRoomHandler extends SimpleChannelInboundHandler<TextWebSocketFr
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
 
-        System.out.println(ctx.channel().remoteAddress()+"建立了连接");
+        log.error(ctx.channel().remoteAddress()+"建立了连接");
         for (Channel channel : channels) {
             channel.writeAndFlush(new TextWebSocketFrame(ctx.channel().remoteAddress() + "已经进入聊天室"));
         }
@@ -55,7 +56,7 @@ public class ChatRoomHandler extends SimpleChannelInboundHandler<TextWebSocketFr
      */
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        System.out.println(ctx.channel().remoteAddress()+"断开了连接");
+        log.error(ctx.channel().remoteAddress()+"断开了连接");
         channels.remove(ctx.channel());
         for (Channel channel : channels) {
             channel.writeAndFlush(new TextWebSocketFrame(ctx.channel().remoteAddress() + "离开了聊天室"));
@@ -63,6 +64,9 @@ public class ChatRoomHandler extends SimpleChannelInboundHandler<TextWebSocketFr
 
     }
 
-
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        log.error("发生了异常{}",cause);
+    }
 }
 

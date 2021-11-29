@@ -9,7 +9,6 @@ import com.moumangtai.demo.util.md5Util;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * <p>
@@ -17,7 +16,7 @@ import java.util.Date;
  * </p>
  *
  * @author wqd
- * @since 2021-11-12
+ * @since 2021-11-27
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
@@ -26,15 +25,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private UserMapper userMapper;
 
     /**
-     * 登陆验证
+     * 登陆和注册一体(返回码 0 登陆成功 1注册后登陆成功 -1 登陆失败 )
      * @param userName
      * @param passWord
      * @return
      */
     @Override
-    public Boolean checkLogin(String userName, String passWord) {
-        User user = userMapper.selectOne(new QueryWrapper<User>().eq("user_name", userName).eq("pass_word", md5Util.code(passWord)));
-        return user!=null;
+    public Integer loginAndRegister(String userName, String passWord) {
+        try {
+            User user = userMapper.selectOne(new QueryWrapper<User>().eq("user_name", userName).eq("pass_word", md5Util.code(passWord)));
+            if(user==null){
+                Boolean register = register(userName, passWord);
+                return register?1:-1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return 0;
     }
 
     /**
@@ -50,9 +58,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             user = new User();
             user.setUserName(userName);
             user.setPassWord(md5Util.code(passWord));
-            user.setCreateTime(new Date());
-            user.setModifiedTime(new Date());
-            user.setDeleted(0);
             userMapper.insert(user);
             return true;
         }

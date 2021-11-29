@@ -11,19 +11,30 @@
             window.WebSocket = window.MozWebSocket;
         }
         if (window.WebSocket) {
+            // 定义websocket对象  协议://ip:端口/路由名
             socket = new WebSocket("ws://127.0.0.1:8112/websocket");
+
+            // 定义websocket的生命周期
             socket.onmessage = function(event) {
                 var ta = document.getElementById('responseText');
                 ta.value = ta.value + '\n' + event.data
+                ta.scrollTop = ta.scrollHeight;
             };
             socket.onopen = function(event) {
                 var ta = document.getElementById('responseText');
                 ta.value = "连接开启!";
+                ta.scrollTop = ta.scrollHeight;
             };
             socket.onclose = function(event) {
                 var ta = document.getElementById('responseText');
                 ta.value = ta.value + "\n连接被关闭";
+                ta.scrollTop = ta.scrollHeight;
             };
+            socket.onerror = function (event) {
+                var ta = document.getElementById('responseText');
+                ta.value = ta.value + "\n" + event;
+                ta.scrollTop = ta.scrollHeight;
+            }
         } else {
             alert("你的浏览器不支持 WebSocket！");
         }
@@ -38,7 +49,17 @@
                 alert("连接没有开启.");
             }
         }
+
+        function login(userName,passWord){
+
+        }
     </script>
+    <form onsubmit="return false;">
+        <h3>登陆</h3>
+        账号：<input type="text" name="userName" value="">
+        密码：<input type="password" name="passWord" value="">
+        <input type="button" onclick="login(this.form.userName.value,this.form.passWord.value)">
+    </form>
 
     <form onsubmit="return false;">
         <h3>WebSocket 聊天室：</h3>

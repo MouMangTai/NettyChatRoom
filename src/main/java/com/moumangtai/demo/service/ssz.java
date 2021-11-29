@@ -9,9 +9,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author wqd
- * @since 2021-11-27
+ * @since 2021-11-12
  */
-public interface IUserService extends IService<User> {
+public interface ssz extends IService<User> {
 
     /**
      * 登陆和注册一体(返回码 0 登陆成功 1注册后登陆成功 -1 登陆失败 )

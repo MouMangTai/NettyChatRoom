@@ -1,3 +1,6 @@
+# springboot 端口号
+server:
+  port: 8111
 # 应用名称
 spring:
   application:
@@ -5,11 +8,11 @@ spring:
 # 数据库相关
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/chatroom?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://127.0.0.1:3306/chatRoom?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
 #    username: chatRoom
 #    password: 7KSmK542SzbJfJyy
-    username: chatRoom
-    password: 7KSmK542SzbJfJyy
+    username: root
+    password: Winner99,,
   # Redis配置
   redis:
     # Redis 服务器地址
@@ -40,24 +43,7 @@ logging:
   level:
     root: info
 
-# 配置mybatisPlus
-mybatis-plus:
-  configuration:
-    map-underscore-to-camel-case: true
-    auto-mapping-behavior: full
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath*:mapper/**/*Mapper.xml
-  global-config:
-    # 逻辑删除配置
-    db-config:
-      # 删除前
-      logic-not-delete-value: 1
-      # 删除后
-      logic-delete-value: 0
-
 # 配置序列化算法
 serializer:
   type: JDK
 
-server:
-  port: 8111

@@ -49,14 +49,14 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.2.0</version>
+            <version>3.3.0</version>
         </dependency>
 
         <!-- mybatis plus 代码生成器 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
-            <version>3.2.0</version>
+            <version>3.3.0</version>
         </dependency>
 
         <!--mysql驱动-->

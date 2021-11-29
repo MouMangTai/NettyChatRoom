@@ -2,7 +2,6 @@ package com.moumangtai.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import lombok.Data;
 
 /**
  * <p>
@@ -10,10 +9,9 @@ import lombok.Data;
  * </p>
  *
  * @author wqd
- * @since 2021-11-12
+ * @since 2021-11-27
  */
-@Data
-public class User extends BaseEntity {
+public class User  {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,5 +31,34 @@ public class User extends BaseEntity {
      */
     private String passWord;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+            "id=" + id +
+            ", userName=" + userName +
+            ", passWord=" + passWord +
+        "}";
+    }
 }

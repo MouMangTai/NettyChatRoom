@@ -20,27 +20,17 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
 
     @Override
     protected void initChannel(SocketChannel channel) throws Exception {
-
-        /*channel.pipeline().addLast(new LoggingHandler(LogLevel.DEBUG));
-        channel.pipeline().addLast(new MessageCodec());
-        channel.pipeline().addLast(new LoginRequestHandler());
-        channel.pipeline().addLast(new SendRequestHandler());
-        channel.pipeline().addLast(new GcreateRequestHandler());
-        channel.pipeline().addLast(new GsendRequestHandler());
-        channel.pipeline().addLast(new RegisterRequestHandler());
-        channel.pipeline().addLast(new RpcRequestHandler());
-        channel.pipeline().addLast(new ServerHandler());*/
-
-        //编解码http消息
+        // websocket 基于 http 协议，编解码 http 消息
         channel.pipeline().addLast(new HttpServerCodec());
-        //支持大数据流
+        // 支持大数据流，提供对数据流的读写
         channel.pipeline().addLast(new ChunkedWriteHandler());
-        //将解码后的多条信息整合为一条的handler
+        // 对 http的消息进行聚合，聚合成 FullHttpRequest 和 FullHttpResponse
         channel.pipeline().addLast(new HttpObjectAggregator(65536));
-        //建立握手
+        // 帮助管理 websocket 建立握手动作，包含 websocket 的关闭， ping， pong 等
+        // 对于 websocket 来讲，都是以 frame 来进行传输的，不同的数据类型对应的 frame 也不同
+        // 即 TextWebSocketFrame，专门用于处理文本对象
         channel.pipeline().addLast(new WebSocketServerProtocolHandler("/websocket"));
-        //监听读写的handler
+        // 自定义handler，管理生命周期以及读写
         channel.pipeline().addLast(chatRoomHandler);
-
     }
 }

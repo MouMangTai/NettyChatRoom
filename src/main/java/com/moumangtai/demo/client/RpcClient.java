@@ -3,8 +3,6 @@ package com.moumangtai.demo.client;
 import com.moumangtai.demo.constant.MessageConstant;
 import com.moumangtai.demo.constant.SequenceIdGenerator;
 import com.moumangtai.demo.message.RpcRequestMessage;
-import com.moumangtai.demo.service.IUserService;
-import com.moumangtai.demo.service.impl.UserServiceImpl;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -21,20 +19,20 @@ import java.lang.reflect.Proxy;
 public class RpcClient {
 
     public static void main(String[] args) {
-        IUserService iUserService = new UserServiceImpl();
-        IUserService proxyService = getProxyService(iUserService.getClass());
-        System.out.println(proxyService.RpcTest(200));
-        System.out.println(proxyService.RpcTest(300));
-        System.out.println(proxyService.RpcTest(400));
-        System.out.println(proxyService.RpcTest(200));
-        System.out.println(proxyService.RpcTest(300));
-        System.out.println(proxyService.RpcTest(400));
-        System.out.println(proxyService.RpcTest(200));
-        System.out.println(proxyService.RpcTest(300));
-        System.out.println(proxyService.RpcTest(400));
-        System.out.println(proxyService.RpcTest(200));
-        System.out.println(proxyService.RpcTest(300));
-        System.out.println(proxyService.RpcTest(400));
+//        ssz iUserService = new Ss();
+//        ssz proxyService = getProxyService(iUserService.getClass());
+//        System.out.println(proxyService.RpcTest(200));
+//        System.out.println(proxyService.RpcTest(300));
+//        System.out.println(proxyService.RpcTest(400));
+//        System.out.println(proxyService.RpcTest(200));
+//        System.out.println(proxyService.RpcTest(300));
+//        System.out.println(proxyService.RpcTest(400));
+//        System.out.println(proxyService.RpcTest(200));
+//        System.out.println(proxyService.RpcTest(300));
+//        System.out.println(proxyService.RpcTest(400));
+//        System.out.println(proxyService.RpcTest(200));
+//        System.out.println(proxyService.RpcTest(300));
+//        System.out.println(proxyService.RpcTest(400));
     }
 
     public static <T> T getProxyService(Class<T> service){
