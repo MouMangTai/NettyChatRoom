@@ -17,7 +17,7 @@ public class RedisUtil {
     /**
      * 获取单个对象
      */
-    public <T> T get(String key, Class<T> clazz) {
+    public <T> T  get(String key, Class<T> clazz) {
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();

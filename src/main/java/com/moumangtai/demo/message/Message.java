@@ -1,28 +1,31 @@
 package com.moumangtai.demo.message;
 
+
 import lombok.Data;
 
-import java.io.Serializable;
-
-
+/**
+ * 消息头
+ */
 @Data
-public abstract class Message implements Serializable {
+public class Message {
 
-    private int messageType;
+    /**
+     * 消息id（自增）
+     */
+    private Long messageId;
 
-    private int sequenceId;
+    /**
+     * 消息类型（利用枚举）
+     */
+    private Integer messageType;
 
-    public Message() {
-    }
+    /**
+     * 消息内容体
+     */
+    private MessageContent messageContent;
 
-    public Message(int messageType, int sequenceId) {
-        this.messageType = messageType;
-        this.sequenceId = sequenceId;
-    }
-
-    public Message(int sequenceId) {
-        this.sequenceId = sequenceId;
-    }
-
-    public abstract int getMessageType();
+    /**
+     * 扩展信息
+     */
+    private String extend;
 }

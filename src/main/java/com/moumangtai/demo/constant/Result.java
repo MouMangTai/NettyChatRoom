@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * 返回给后端的http响应统一格式
  */
@@ -33,7 +30,7 @@ public class Result {
     /**
      * 响应数据
      */
-    private Map<String,Object> data = new HashMap<>();
+    private Object data ;
 
     /**
      * 返回一个默认的错误信息
@@ -56,7 +53,7 @@ public class Result {
      * @param data
      * @return
      */
-    public static Result success(Map<String,Object> data){
+    public static Result success(Object data){
         return new Result(true,HttpEnum.SUCCESS.getCode(), HttpEnum.SUCCESS.getMsg(), data);
     }
 
@@ -66,7 +63,7 @@ public class Result {
      * @param data
      * @return
      */
-    public static Result success(String message,Map<String,Object> data){
+    public static Result success(String message,Object data){
         return new Result(true,HttpEnum.SUCCESS.getCode(), message, data);
     }
 
@@ -77,7 +74,7 @@ public class Result {
      * @param data
      * @return
      */
-    public static Result success(Integer code,String message,Map<String,Object> data){
+    public static Result success(Integer code,String message,Object data){
         return new Result(true,code , message, data);
     }
 }

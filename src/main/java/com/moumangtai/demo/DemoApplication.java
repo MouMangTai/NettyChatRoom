@@ -15,7 +15,8 @@ public class DemoApplication{
     public static void main(String[] args) throws InterruptedException {
         ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
         Server server = context.getBean(Server.class);
-        InetSocketAddress address = new InetSocketAddress("127.0.0.1",8112);
+        InetSocketAddress address = new InetSocketAddress("127.0.0.1",8114);
         server.bind(address);
     }
+
 }

@@ -4,10 +4,7 @@ import io.netty.channel.Channel;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 用于存储用户会话
@@ -17,18 +14,18 @@ import java.util.Set;
 public class Session {
 
 
-    private Map<String,Channel> nameToChannel = new HashMap<>();
+    private Map<Long,Channel> IdToChannel = new HashMap<>();
 
-    private Map<Channel,String> channelToName = new HashMap<>();
+    private Map<Channel,Long> ChannelToId = new HashMap<>();
 
     /**
      * 绑定
-     * @param userName
+     * @param userId
      * @param channel
      */
-    public void bind(String userName, Channel channel) {
-        nameToChannel.put(userName,channel);
-        channelToName.put(channel,userName);
+    public void bind(Long userId, Channel channel) {
+        IdToChannel.put(userId,channel);
+        ChannelToId.put(channel,userId);
     }
 
     /**
@@ -36,35 +33,35 @@ public class Session {
      * @param channel
      */
     public void unbind(Channel channel) {
-        nameToChannel.remove(getUserName(channel));
-        channelToName.remove(channel);
+        IdToChannel.remove(getUserId(channel));
+        ChannelToId.remove(channel);
     }
 
     /**
      * 解绑
-     * @param userName
+     * @param userId
      */
-    public void unbind(String userName){
-        nameToChannel.get(userName);
-        channelToName.remove(getChannel(userName));
+    public void unbind(Long userId){
+        IdToChannel.get(userId);
+        ChannelToId.remove(getChannel(userId));
     }
 
     /**
-     * 根据用户名获取channel
-     * @param userName
+     * 根据用户Id获取channel
+     * @param userId
      * @return
      */
-    public Channel getChannel(String userName) {
-        return nameToChannel.get(userName);
+    public Channel getChannel(Long userId) {
+        return IdToChannel.get(userId);
     }
 
     /**
-     * 根据channel获取用户名
+     * 根据channel获取用户Id
      * @param channel
      * @return
      */
-    public String getUserName(Channel channel){
-        return channelToName.get(channel);
+    public Long getUserId(Channel channel){
+        return ChannelToId.get(channel);
     }
 
     /**
@@ -72,12 +69,23 @@ public class Session {
      * @param users
      * @return
      */
-    public Set<Channel> getChannelBatch(Set<String> users){
+    public Set<Channel> getChannelBatch(Set<Long> users){
         Set<Channel> set = new HashSet<>();
         users.stream().forEach(user -> {
             set.add(getChannel(user));
         });
         return set;
     }
+
+    /**
+     * 获取所有在线用户的Id
+     *
+     * @return
+     */
+    public Collection<Long> onlineUsers(){
+        return ChannelToId.values();
+    }
+
+
 
 }

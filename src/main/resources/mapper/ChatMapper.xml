@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moumangtai.demo.mapper.ChatMapper">
+
+    <update id="updateACKSendBatch" parameterType="java.util.List">
+        UPDATE
+            chat
+        SET
+            state = 1
+        WHERE
+            id
+        IN
+            (
+            <foreach collection="list" item="item" separator=",">
+                #{item,jdbcType=BIGINT}
+            </foreach>
+            )
+    </update>
+
+    <select id="getUnSendChatByUserId" parameterType="Long" resultType="com.moumangtai.demo.entity.Chat">
+        SELECT
+            c.id id,
+            c.msg_type msgType,
+            c.from_id fromId,
+            c.to_id toId,
+            c.content content,
+            c.state state,
+            c.create_date createDate
+        FROM
+            chat c
+        WHERE
+            to_id = #{userId}
+        AND
+            state = 0
+    </select>
+
+</mapper>

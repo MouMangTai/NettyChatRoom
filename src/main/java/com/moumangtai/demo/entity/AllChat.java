@@ -2,18 +2,23 @@ package com.moumangtai.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
- * 用户表
+ * 全频道聊天表
  * </p>
  *
  * @author wqd
- * @since 2021-11-27
+ * @since 2021-12-07
  */
 @Data
-public class User  {
+@AllArgsConstructor
+public class AllChat implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,34 +29,17 @@ public class User  {
     private Long id;
 
     /**
-     * 用户名
+     * 发送方id
      */
-    private String userName;
+    private Long fromId;
 
     /**
-     * 加密后的密码
+     * 内容
      */
-    private String passWord;
+    private String content;
 
     /**
-     * 头像
+     * 消息发送时间
      */
-    private String avatar;
-
-    /**
-     * 昵称
-     */
-    private String nickName;
-
-    /**
-     * 性别
-     */
-    private Integer sex;
-
-    /**
-     * 地址
-     */
-    private String address;
-
-
+    private Date createDate;
 }

@@ -1,6 +1,6 @@
 package com.moumangtai.demo.server;
 
-import com.moumangtai.demo.handler.ChatRoomHandler;
+import com.moumangtai.demo.handler.MessageHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.http.HttpObjectAggregator;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> {
 
-    private ChatRoomHandler chatRoomHandler = new ChatRoomHandler();
+    private MessageHandler messageHandler = new MessageHandler();
 
     @Override
     protected void initChannel(SocketChannel channel) throws Exception {
@@ -31,6 +31,6 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
         // 即 TextWebSocketFrame，专门用于处理文本对象
         channel.pipeline().addLast(new WebSocketServerProtocolHandler("/websocket"));
         // 自定义handler，管理生命周期以及读写
-        channel.pipeline().addLast(chatRoomHandler);
+        channel.pipeline().addLast(messageHandler);
     }
 }
