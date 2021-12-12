@@ -1,7 +1,9 @@
 package com.moumangtai.demo.mapper;
 
-import com.moumangtai.demo.entity.AllChat;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.moumangtai.demo.entity.AllChat;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +15,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface AllChatMapper extends BaseMapper<AllChat> {
 
+    /**
+     * 分页获取全频道聊天
+     * @param pageSize
+     * @return
+     */
+    List<AllChat> getAllChatByPage(Integer pageSize);
 }

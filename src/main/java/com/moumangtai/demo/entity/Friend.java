@@ -2,18 +2,24 @@ package com.moumangtai.demo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
 
 /**
  * <p>
- * 用户表
+ * 
  * </p>
  *
  * @author wqd
- * @since 2021-11-27
+ * @since 2021-12-09
  */
 @Data
-public class User  {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Friend implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,33 +30,12 @@ public class User  {
     private Long id;
 
     /**
-     * 用户名
+     * 用户A id
      */
-    private String userName;
+    private Long fromId;
 
     /**
-     * 加密后的密码
+     * 用户B id
      */
-    private String passWord;
-
-    /**
-     * 头像
-     */
-    private String avatar;
-
-    /**
-     * 昵称
-     */
-    private String nickName;
-
-    /**
-     * 性别
-     */
-    private Integer sex;
-
-    /**
-     * 地址
-     */
-    private String address;
-
+    private Long toId;
 }

@@ -4,6 +4,7 @@ import com.moumangtai.demo.entity.Chat;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -27,4 +28,11 @@ public interface ChatMapper extends BaseMapper<Chat> {
      * @return
      */
     List<Chat> getUnSendChatByUserId(Long userId);
+
+    /**
+     * 分页获取好友列表
+     * @param map
+     * @return
+     */
+    List<Chat> getChatByPage(Map<String, Object> map);
 }

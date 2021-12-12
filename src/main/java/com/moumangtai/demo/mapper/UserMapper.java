@@ -1,7 +1,10 @@
 package com.moumangtai.demo.mapper;
 
-import com.moumangtai.demo.entity.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.moumangtai.demo.entity.User;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +16,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    /**
+     * 分页获取所有用户并且判断是否是好友
+     * @return
+     */
+    List<User> allUsers(Map<String,Object> map);
 }

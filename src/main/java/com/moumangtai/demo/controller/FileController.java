@@ -25,16 +25,24 @@ public class FileController {
     @Value("${file.ip}")
     private String ip;
 
+    @Value("${file.path}")
+    private String path;
+
     @PostMapping("/upload")
     public Result upload(@RequestParam MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
         // 定义前缀
         String uuid = IdUtil.fastSimpleUUID();
+        String uploadPath = null;
         // 定义路径
-        String uploadPath = System.getProperty("user.dir")+"/src/main/resources/resources/file/" +uuid+"-"+fileName;
+        if (path.equals("local")) {
+            uploadPath = System.getProperty("user.dir") + "/src/main/resources/resources/file/" + uuid + "-" + fileName;
+        } else {
+            uploadPath = path + uuid + "-" + fileName;
+        }
         // 上传
-        FileUtil.writeBytes(file.getBytes(),uploadPath);
-        return Result.success("http://"+ip+":"+port+"/file/download/"+uuid); //返回结果url
+        FileUtil.writeBytes(file.getBytes(), uploadPath);
+        return Result.success("http://" + ip + ":" + port + "/file/download/" + uuid); //返回结果url
     }
 
     /**
@@ -46,7 +54,12 @@ public class FileController {
     @GetMapping("/download/{flag}")
     public void download(@PathVariable String flag, HttpServletResponse response) {
         OutputStream os;  // 新建一个输出流对象
-        String basePath = System.getProperty("user.dir")+"/src/main/resources/resources/file/";  // 定于文件上传的根路径
+        String basePath = null;
+        if(path.equals("local")){
+            basePath = System.getProperty("user.dir") + "/src/main/resources/resources/file/";  // 定于文件上传的根路径
+        }else{
+            basePath = path ;
+        }
         List<String> fileNames = FileUtil.listFileNames(basePath);  // 获取所有的文件名称
         String fileName = fileNames.stream().filter(name -> name.contains(flag)).findAny().orElse("");  // 找到跟参数一致的文件
         try {

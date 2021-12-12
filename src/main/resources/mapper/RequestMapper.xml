@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moumangtai.demo.mapper.RequestMapper">
+
+    <select id="allFriendRequest" parameterType="java.util.Map" resultType="com.moumangtai.demo.entity.Request">
+        select r.* from
+            request r left join user u
+        on
+            r.from_id = u.id
+        where
+            (r.type = 0)
+        and
+            (r.state = 0 or r.state = 1)
+        and
+            r.to_id = #{userId}
+        <if test="search != null and search != ''" >
+            and u.user_name like concat('%',#{search},'%')
+        </if>
+        limit
+        #{currentPage},#{pageSize}
+    </select>
+</mapper>

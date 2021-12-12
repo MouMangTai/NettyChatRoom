@@ -10,6 +10,7 @@ import com.moumangtai.demo.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -24,18 +25,19 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
+    @Resource
     private IUserService iUserService;
 
     /**
      * 登陆和注册一体(返回码 0 登陆成功 1注册后登陆成功 -1 登陆失败 )
+     *
      * @param userLoginDto
      * @return
      */
     @PostMapping("/loginAndRegister")
-    public Result loginAndRegister(@RequestBody UserLoginDto userLoginDto){
-        Map<String,Object> res = iUserService.loginAndRegister(userLoginDto.getUserName(), userLoginDto.getPassWord());
-        return res==null?Result.error():Result.success(res);
+    public Result loginAndRegister(@RequestBody UserLoginDto userLoginDto) {
+        Map<String, Object> res = iUserService.loginAndRegister(userLoginDto.getUserName(), userLoginDto.getPassWord());
+        return res == null ? Result.error() : Result.success(res);
     }
 
     /**
@@ -45,8 +47,8 @@ public class UserController {
      * @return
      */
     @GetMapping("/judgeTokenExpire")
-    public Result judgeTokenExpire(@RequestParam String token){
-        return JwtUtil.judgeIsExpire(token)?Result.success(true):Result.success(false);
+    public Result judgeTokenExpire(@RequestParam String token) {
+        return JwtUtil.judgeIsExpire(token) ? Result.success(true) : Result.success(false);
     }
 
     /**
@@ -56,41 +58,44 @@ public class UserController {
      * @return
      */
     @GetMapping("/getUserByToken")
-    public Result getUserByToken(@RequestParam String token){
+    public Result getUserByToken(@RequestParam String token) {
         User user = iUserService.getUserByToken(token);
-        return user==null?Result.error():Result.success(user);
+        return user == null ? Result.error() : Result.success(user);
     }
 
     /**
      * 添加用户
+     *
      * @param user
      * @return
      */
     @PostMapping("/save")
-    public Result save(@RequestBody User user){
+    public Result save(@RequestBody User user) {
         User u = iUserService.insertUser(user);
-        return u!=null?Result.success(u):Result.error();
+        return u != null ? Result.success(u) : Result.error();
     }
 
     @GetMapping("/delete")
-    public Result delete(@RequestParam Integer id){
+    public Result delete(@RequestParam Integer id) {
         Boolean flag = iUserService.deleteById(id);
-        return flag?Result.success():Result.error();
+        return flag ? Result.success() : Result.error();
     }
 
     /**
      * 修改用户
+     *
      * @param user
      * @return
      */
     @PostMapping("/update")
-    public Result update(@RequestBody User user){
+    public Result update(@RequestBody User user) {
         User u = iUserService.updateUser(user);
-        return u!=null?Result.success(u):Result.error();
+        return u != null ? Result.success(u) : Result.error();
     }
 
     /**
      * 分页获取用户数据
+     *
      * @param pageNum
      * @param pageSize
      * @param search
@@ -99,15 +104,18 @@ public class UserController {
     @GetMapping("/findPage")
     public Result findPage(@RequestParam Integer pageNum,
                            @RequestParam Integer pageSize,
-                           @RequestParam String search){
+                           @RequestParam String search) {
         Page<?> page = iUserService.findPage(pageNum, pageSize, search);
-        return page!=null?Result.success(page):Result.error();
+        return page != null ? Result.success(page) : Result.error();
     }
 
+    /**
+     * 获取当前在线用户
+     *
+     * @return
+     */
     @GetMapping("/onlineUsers")
-    public Result onlineUsers(){
+    public Result onlineUsers() {
         return Result.success(iUserService.onlineUsers());
     }
-
-
 }

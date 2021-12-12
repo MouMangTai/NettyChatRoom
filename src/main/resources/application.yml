@@ -9,10 +9,10 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/chatroom?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-#    username: chatRoom
-#    password: 7KSmK542SzbJfJyy
-    username: root
-    password: Winner99,,
+#    username:
+#    password:
+    username:
+    password:
   # Redis配置
   redis:
     # Redis 服务器地址
@@ -38,10 +38,14 @@ spring:
         min-idle: 0
   cache:
     type: redis
+  profiles:
+    active: prod
 
 logging:
   level:
     root: info
 
+
 file:
   ip: 127.0.0.1
+  path: local

@@ -3,8 +3,12 @@ package com.moumangtai.demo.controller;
 
 import com.moumangtai.demo.constant.Result;
 import com.moumangtai.demo.service.IChatService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -15,25 +19,22 @@ import org.springframework.web.bind.annotation.*;
  * @since 2021-11-30
  */
 @RestController
-@RequestMapping("/demo/chat")
+@RequestMapping("/chat")
 public class ChatController {
 
-    @Autowired
+    @Resource
     private IChatService iChatService;
 
-
-    @PostMapping("/text")
-    public Result text(@RequestParam String token){
-//        List<Chat> unSendChatByUserId = iChatService.getUnSendChatByUserId(35L);
-//        System.out.println(unSendChatByUserId.toString());
-//        User user = new User();
-//        user.setId(25L);
-//        user.setUserName("");
-//        user.setPassWord("213123");
-//        System.out.println(JwtUtil.verifyToken(JwtUtil.getToken(user)));
-//        return null;
-
-        return null;
+    /**
+     * 分页获取好友聊天记录
+     * @param userId
+     * @param friendId
+     * @param PageSize
+     * @return
+     */
+    @GetMapping("/getChatByPage")
+    public Result getAllChatByPage(@RequestParam Long userId,@RequestParam Long friendId,@RequestParam Integer PageSize){
+        return Result.success(iChatService.getChatByPage(userId,friendId,PageSize));
     }
 
 }

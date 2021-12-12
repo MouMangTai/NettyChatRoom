@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.moumangtai.demo.mapper.UserMapper">
+    <select id="allUsers" resultType="com.moumangtai.demo.entity.User" parameterType="java.util.Map">
+        select
+            u.id,
+            u.user_name userName,
+            u.nick_name nickName,
+            u.avatar,
+            !ISNULL(f.id) isFriend
+        from
+            user u left join friend f
+        on
+            (
+            u.id = f.from_id and f.to_id = #{userId}
+            )
+            or
+            (
+            u.id = f.to_id and f.from_id = #{userId}
+            )
+        where
+            u.id != #{userId}
+        <if test="search != null and search != ''" >
+            and user_name like concat('%',#{search},'%')
+        </if>
+        limit
+            #{currentPage},#{pageSize}
 
+    </select>
 </mapper>

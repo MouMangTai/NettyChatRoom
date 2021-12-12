@@ -34,4 +34,25 @@
             state = 0
     </select>
 
+    <select id="getChatByPage" parameterType="java.util.Map" resultType="com.moumangtai.demo.entity.Chat">
+        select * from chat
+        where
+            id
+        in
+        (
+            select t.id from
+            (
+                select id from chat
+                where
+                    (from_id = #{userId} and to_id = #{friendId})
+                or
+                    (from_id = #{friendId} and to_id = #{userId})
+                order by id desc
+                limit #{PageSize}
+            )
+            as t
+        )
+        order by id
+    </select>
+
 </mapper>

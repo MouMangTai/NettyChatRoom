@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.moumangtai.demo.mapper.FriendMapper">
+    <select id="allFriends" resultType="com.moumangtai.demo.entity.User" parameterType="java.util.Map">
+        select
+        u.*
+        from
+        friend f left join user u
+        on
+        (
+        u.id = f.from_id and f.to_id = #{userId}
+        )
+        or
+        (
+        u.id = f.to_id and f.from_id = #{userId}
+        )
+        where
+        u.id != #{userId}
+        <if test="search != null and search != ''">
+            and user_name like concat('%',#{search},'%')
+        </if>
+        limit
+        #{currentPage},#{pageSize}
+    </select>
+
+    <select id="allNonFriends" resultType="com.moumangtai.demo.entity.User" parameterType="java.util.Map">
+        select * from user u2 where u2.id not in
+        (
+            select
+                u.id
+            from
+                friend f left join user u
+            on
+                (
+                u.id = f.from_id and f.to_id = #{userId}
+                )
+                or
+                (
+                u.id = f.to_id and f.from_id = #{userId}
+                )
+            where
+                u.id!=#{userId}
+        )
+        and u2.id!=#{userId}
+        <if test="search != null and search != ''">
+            and user_name like concat('%',#{search},'%')
+        </if>
+        limit
+        #{currentPage},#{pageSize}
+    </select>
+</mapper>

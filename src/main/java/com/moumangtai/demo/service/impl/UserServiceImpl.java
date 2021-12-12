@@ -187,19 +187,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      * @return
      */
     @Override
-
     public Map<String,Object> onlineUsers() {
         Collection<Long> ids = SessionFactory.getSession().onlineUsers();
         Map<String,Object> map = new HashMap<>();
-
-        System.out.println(ids.toString());
         if(ids!=null&&ids.size()!=0){
             List<User> users = userMapper.selectBatchIds(ids);
             map.put("users",users);
-            System.out.println(users.toString());
             map.put("ids",new ArrayList<>(ids));
             return map;
         }
         return null;
     }
+
 }

@@ -28,5 +28,12 @@ public interface IChatService extends IService<Chat> {
      */
     List<Chat> getUnSendChatByUserId(Long userId);
 
-
+    /**
+     * 分页获取好友聊天记录
+     * @param userId
+     * @param friendId
+     * @param PageSize
+     * @return
+     */
+    List<Object> getChatByPage(Long userId, Long friendId, Integer PageSize);
 }
