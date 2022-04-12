@@ -42,7 +42,6 @@ public class MessageHandler extends SimpleChannelInboundHandler<TextWebSocketFra
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         System.out.println(ctx.channel().remoteAddress() + "发生异常:" + cause);
         cause.printStackTrace();
-
         SessionFactory.getSession().unbind(ctx.channel());
         channels.remove(ctx.channel());
         cause.printStackTrace();
@@ -110,8 +109,6 @@ public class MessageHandler extends SimpleChannelInboundHandler<TextWebSocketFra
             }
 
             // 查询该用户是否还有为接收到的好友请求消息
-
-
             List<Request> unReceiveRequest = iRequestService.list(
                     new QueryWrapper<Request>()
                             .eq("to_id", user.getId())

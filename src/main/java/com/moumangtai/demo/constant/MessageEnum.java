@@ -20,10 +20,6 @@ public enum MessageEnum {
     REFUSE_FRIEND(9,"好友申请拒绝应答"),
     ACK_FRIEND(10,"好友请求应答");
 
-
-
-
-
     public Integer code;
     public String type;
 

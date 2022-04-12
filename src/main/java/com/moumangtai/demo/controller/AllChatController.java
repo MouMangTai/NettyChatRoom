@@ -33,4 +33,13 @@ public class AllChatController {
     public Result getAllChatByPage(@RequestParam Long userId,@RequestParam Integer PageSize){
         return Result.success(iAllChatService.getAllChatByPage(userId,PageSize));
     }
+
+    /**
+     * 测试接口
+     * @return
+     */
+    @GetMapping("/test")
+    public String test(){
+        return "测试测试";
+    }
 }

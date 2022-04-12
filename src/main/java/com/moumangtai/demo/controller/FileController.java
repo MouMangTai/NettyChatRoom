@@ -29,6 +29,7 @@ public class FileController {
     private String path;
 
     @PostMapping("/upload")
+    @CrossOrigin
     public Result upload(@RequestParam MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
         // 定义前缀
@@ -52,6 +53,7 @@ public class FileController {
      * @param response
      */
     @GetMapping("/download/{flag}")
+    @CrossOrigin
     public void download(@PathVariable String flag, HttpServletResponse response) {
         OutputStream os;  // 新建一个输出流对象
         String basePath = null;

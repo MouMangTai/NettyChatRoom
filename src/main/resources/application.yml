@@ -8,19 +8,20 @@ spring:
 # 数据库相关
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/chatroom?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-#    username:
-#    password:
-    username:
-    password:
+    url: jdbc:mysql://152.136.230.44:3306/chatroom?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+    username: chatRoom
+    password: 7KSmK542SzbJfJyy
+    druid:
+      test-on-borrow: true
+      test-while-idle: true
   # Redis配置
   redis:
     # Redis 服务器地址
-    host: 127.0.0.1
+    host: 152.136.230.44
     # 连接端口号
     port: 6379
     # 密码
-    password: Winner99,,
+    password: 123456
     # 数据库索引（0 - 15）
     database: 0
     # 连接超时时间（毫秒）
@@ -38,14 +39,13 @@ spring:
         min-idle: 0
   cache:
     type: redis
-  profiles:
-    active: prod
+#  profiles:
+#    active: prod
 
 logging:
   level:
     root: info
 
-
 file:
-  ip: 127.0.0.1
-  path: local
+  ip: 152.136.230.44
+  path: /www/wwwroot/album.moumangtai.com/img/
