@@ -21,7 +21,7 @@ spring:
     # 连接端口号
     port: 6379
     # 密码
-    password: 123456
+    password: Winner99,,
     # 数据库索引（0 - 15）
     database: 0
     # 连接超时时间（毫秒）
